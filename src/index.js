@@ -51,9 +51,16 @@ class Game extends React.Component {
   }
 
   handleClick(i) {
+
+    /* en caso de haber usado el time travel con jumpTo,
+       al hacer click estoy reescribiendo la historia,
+       por lo tanto tengo que borrar los pasos futuros
+    */
     var history = this.state.history.slice(0, this.state.stepNumber + 1);
     var current = history[history.length - 1];
     const squares = current.squares.slice();
+
+    // no deja clickear si ya hay ganador o el cuadrado ya tiene un valor
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
